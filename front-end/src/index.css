@@ -1,68 +1,116 @@
+/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      CSS COLOR VARIABLES FOR STYLING MD3 COMPONENTS
+  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+:root, :host {
+  --md-sys-color-background: #f7f9ff;
+  --md-sys-color-on-background: #171c21;
+  --md-sys-color-surface: #f7f9ff;
+  --md-sys-color-surface-dim: #d6dae1;
+  --md-sys-color-surface-bright: #f7f9ff;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f0f4fa;
+  --md-sys-color-surface-container: #eaeef5;
+  --md-sys-color-surface-container-high: #e4e8ef;
+  --md-sys-color-surface-container-highest: #dfe3e9;
+  --md-sys-color-on-surface: #171c21;
+  --md-sys-color-surface-variant: #dae3ef;
+  --md-sys-color-on-surface-variant: #3e4851;
+  --md-sys-color-inverse-surface: #2c3136;
+  --md-sys-color-inverse-on-surface: #edf1f7;
+  --md-sys-color-outline: #6f7882;
+  --md-sys-color-outline-variant: #bec7d2;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-surface-tint: #006495;
+  --md-sys-color-primary: #006495;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #29abf6;
+  --md-sys-color-on-primary-container: #001929;
+  --md-sys-color-inverse-primary: #8fcdff;
+  --md-sys-color-secondary: #3d627f;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #bee0ff;
+  --md-sys-color-on-secondary-container: #214763;
+  --md-sys-color-tertiary: #8342a1;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #cc86eb;
+  --md-sys-color-on-tertiary-container: #29003c;
+  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #410002;
+}
+
+/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      CSS VARIABLES TO BE USED THROUGHOUT THE PROJECT
+  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+:root {
+  --webpage-display-xl-font-size: 88px;
+  --webpage-display-m-font-size: 45px;
+  --webpage-title-l-font-size: 22px;
+  --webpage-title-m-font-size: 16px;
+  --webpage-title-s-font-size: 14px;
+  --webpage-body-l-font-size: 16px;
+  --webpage-body-m-font-size: 14px;
+  --webpage-headline-s-font-size: 24px;
+  --webpage-label-l-font-size: 18px;
+  --webpage-label-s-font-size: 11px;
+  --webpage-shape-xl: 28px;
+  --webpage-shape-l: 16px;
+  --webpage-shape-m: 12px;
+  --webpage-shape-s: 8px;
+  --webpage-shape-xs: 4px;
+  --webpage-spacing-xl: 28px;
+  --webpage-spacing-l: 16px;
+  --webpage-spacing-m: 12px;
+  --webpage-spacing-s: 8px;
+  --webpage-top-app-bar-padding-block: 8px;
+  --webpage-top-app-bar-height: calc(48px + 2 * var(--webpage-spacing-m));
+  --_drawer-width: 300px;
+  --_pane-margin-inline-start: var(--webpage-spacing-xl);
+  --_pane-margin-inline-end: var(--webpage-spacing-l);
+  --_pane-margin-block-end: var(--webpage-spacing-l);
+  --_side-pane-width: 250px;
+  --_scrollbar-width: 8px;
+}
+
+/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        FOR DEVICES WITH SMALL SCREEN WIDTH SIZES
+  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+@media screen and (max-width: 1500px) {
+  --_pane-margin-inline-start: var(--webpage-spacing-xl);
+}
+
+@media screen and (max-width: 600px) {
+  :root {
+    --webpage-display-xl-font-size: 50px;
+    --webpage-title-l-font-size: 16px;
+    --webpage-body-l-font-size: 14px;
+    --webpage-body-m-font-size: 12px;
+    /* Mostly to accommodate content padding on small screens */
+    --webpage-spacing-xl: 16px;
+    --webpage-spacing-l: 12px;
+    --_pane-margin-block-end: 0px;
+    --_pane-margin-inline-start: 0px;
+    --_pane-margin-inline-end: 0px;
+  }
+}
+
+/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        CSS CUSTOM STYLING FOR THE ENTIRE PROJECT
+  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+:root {
+  font-family: 'Google Sans', Roboto, system-ui;
+  --md-ref-typeface-plain: 'Google Sans', Roboto, system-ui;
+  scroll-padding-block-start: calc(var(--webpage-top-app-bar-height) + var(--webpage-top-app-bar-padding-block) * 2);
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
