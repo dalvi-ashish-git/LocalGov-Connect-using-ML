@@ -64,6 +64,8 @@
   --webpage-spacing-l: 16px;
   --webpage-spacing-m: 12px;
   --webpage-spacing-s: 8px;
+  --webpage-spacing-xs: 4px;
+  --webpage-spacing-xxs: 2px;
   --webpage-top-app-bar-padding-block: 8px;
   --webpage-top-app-bar-height: calc(48px + 2 * var(--webpage-spacing-m));
   --_drawer-width: 300px;
