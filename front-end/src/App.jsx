@@ -1,7 +1,15 @@
-import { useState } from 'react';
 import './App.css';
+import { useState } from 'react';
+import TopAppBar from './components/TopAppBar';
+import ModalNavigationDrawer from './components/ModalNavigationDrawer';
 
 function App() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleNavigationDrawer = () => {
+    setDrawerOpen((prev) => !(prev));
+  };
+
   const [activeTab, setActiveTab] = useState('Home');
 
   const tabs = [
@@ -13,6 +21,9 @@ function App() {
   ];
 
   return (
+   <>
+    <TopAppBar onMenuClick={toggleNavigationDrawer} />
+    <ModalNavigationDrawer isOpen={drawerOpen} />
     <div className="app-container">
       <div className="screen-content">
         <h1>{activeTab}</h1>
@@ -32,6 +43,7 @@ function App() {
         ))}
       </nav>
     </div>
+    </>
   );
 }
 
