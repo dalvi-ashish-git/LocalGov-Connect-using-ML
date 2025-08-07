@@ -1,0 +1,39 @@
+.top-app-bar {
+  width: 100%;
+  z-index: 12;
+  display: flex;
+  position: fixed;
+  overflow: hidden;
+  inset: 0 0 auto 0;
+  align-items: center;
+  box-sizing: border-box;
+  color: var(--md-sys-color-on-surface);
+  height: var(--webpage-top-app-bar-height);
+  background-color: var(--md-sys-color-surface-container);
+  padding: var(--webpage-spacing-m) var(--webpage-spacing-l);
+}
+
+.top-app-bar a{
+  outline: none;
+  position: relative;
+  padding-inline: 12px;
+  text-decoration: none;
+  vertical-align: middle;
+  color: var(--md-sys-color-primary);
+  font-size: max(var(--webpage-title-l-font-size),20px);
+}
+
+.top-app-bar .end {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--webpage-spacing-xxs);
+}
+
+.top-app-bar .start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
