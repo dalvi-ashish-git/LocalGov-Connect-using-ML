@@ -116,3 +116,33 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.scroll-wrapper {
+  max-height: 100%;
+  overflow-y: auto;
+  border-radius: inherit;
+  box-sizing: border-box;
+  background-color: transparent;
+  transition: opacity 0.3s linear;
+}
+
+/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  STYLES FOR CLASS SELECTORS ON DEVICES WITH FINE POINTER
+  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+@media (pointer: fine) {
+  .scroll-wrapper {
+    /* firefox */
+    scrollbar-color: var(--md-sys-color-primary) transparent;
+    scrollbar-width: thin;
+  }
+
+  .scroll-wrapper::-webkit-scrollbar {
+    background-color: transparent;
+    width: var(--_scrollbar-width);
+  }
+
+  .scroll-wrapper::-webkit-scrollbar-thumb {
+    background-color: var(--md-sys-color-primary);
+    border-radius: calc(var(--_scrollbar-width) / 2);
+  }
+}
