@@ -1,3 +1,17 @@
+.home-button md-icon {
+  overflow: visible;
+  font-variation-settings: 'FILL' 1;
+}
+
+.start .home-button * {
+  display: flex;
+  color: var(--md-sys-color-primary);
+}
+
+.start .menu-button {
+  display: none;
+}
+
 .top-app-bar {
   width: 100%;
   z-index: 12;
@@ -13,14 +27,14 @@
   padding: var(--webpage-spacing-m) var(--webpage-spacing-l);
 }
 
-.top-app-bar a{
+.top-app-bar a {
   outline: none;
   position: relative;
   padding-inline: 12px;
   text-decoration: none;
   vertical-align: middle;
   color: var(--md-sys-color-primary);
-  font-size: max(var(--webpage-title-l-font-size),20px);
+  font-size: max(var(--webpage-title-l-font-size), 20px);
 }
 
 .top-app-bar .end {
@@ -36,4 +50,14 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+}
+
+@media (max-width: 1500px) {
+  .start .home-button {
+    display: none;
+  }
+
+  .start .menu-button {
+    display: flex;
+  }
 }

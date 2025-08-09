@@ -1,15 +1,17 @@
 import './TopAppBar.css';
-import React from 'react';
 
-function TopAppBar({onMenuClick}) {
+function TopAppBar({isDrawerOpen, onMenuClick}) {
   return (
     <div className="top-app-bar">
       <div className="start">
-        <md-icon-button id="nav-menu" className="menu-button" toggle selected onClick={onMenuClick}>
+        <md-icon-button id="nav-menu" className="menu-button" toggle selected={!isDrawerOpen ? true : false}  onClick={onMenuClick}>
           <md-icon slot="selected">menu</md-icon>
           <md-icon>menu_open</md-icon>
         </md-icon-button>
-        <a href="/">Material Web</a>
+        <md-icon-button href="/" className="home-button">
+          <md-icon>local_see</md-icon>
+        </md-icon-button>
+        <a href="/">LocalGov Connect</a>
       </div>
       <div className="end">
         <md-icon-button>
