@@ -1,0 +1,15 @@
+.modal-scrim {
+  inset: 0;
+  opacity: 0;
+  z-index: 11;
+  position: fixed;
+  visibility: hidden;
+  transition: opacity 0.15s linear, visibility 0s linear 0.15s;
+  background-color: rgba(0, 0, 0, 0.32);
+}
+
+.modal-scrim.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.15s linear;
+}
