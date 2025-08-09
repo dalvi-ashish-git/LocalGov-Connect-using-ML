@@ -1,9 +1,9 @@
 import React from 'react';
 import './ModalNavigationDrawer.css';
 
-function ModalNavigationDrawer({isOpen}) {
+function ModalNavigationDrawer({isDrawerOpen}) {
   return (
-    <div id="nav-drawer" className={`modal-nav-drawer ${isOpen ? 'open' : 'closed'}`}>
+    <div id="nav-drawer" className={`modal-nav-drawer ${isDrawerOpen ? 'open' : 'closed'}`}>
       <div className="scroll-wrapper">
         <md-list className="nav-container" role="menubar">
           <md-item><div className="nav-headline">Home</div></md-item>
