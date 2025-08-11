@@ -1,3 +1,8 @@
 # See https://docs.github.com/en/get-started/git-basics/ignoring-files for more about ignoring files
 
 # Folders
+node_modules/
+front-end/src/assets/woff2/
+
+# Files
+front-end/src/assets/*.css
