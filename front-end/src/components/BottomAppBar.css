@@ -1,0 +1,28 @@
+.bottom-app-bar {
+  width: 100%;
+  z-index: 10;
+  display: none;
+  position: fixed;
+  overflow: hidden;
+  inset: auto 0 0 0;
+  align-items: center;
+  box-sizing: border-box;
+  color: var(--md-sys-color-on-surface);
+  height: var(--webpage-top-app-bar-height);
+  background-color: var(--md-sys-color-surface-container);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  padding: var(--webpage-spacing-m) var(--webpage-spacing-l);
+}
+
+.bottom-app-bar .nav-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+@media (max-width: 900px) {
+  .bottom-app-bar {
+    display: flex;
+  }
+}
