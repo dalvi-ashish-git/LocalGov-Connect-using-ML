@@ -1,0 +1,39 @@
+.pane {
+  width: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  border-radius: var(--webpage-shape-xl);
+  transition: 0.5s cubic-bezier(0.3, 0, 0, 1);
+  background-color: var(--md-sys-color-surface);
+  transition-property: margin, height, border-radius, max-width, width;
+  /* Explicit height to make overflow work */
+  height: calc(100dvh - var(--webpage-top-app-bar-height) - var(--_pane-margin-block-end));
+}
+
+.panes {
+  flex-grow: 1;
+  display: flex;
+  position: fixed;
+  justify-content: start;
+  flex-direction: row-reverse;
+  background-color: transparent;
+  gap: var(--_pane-margin-inline-end);
+  margin-inline: var(--_pane-margin-inline-start) var(--_pane-margin-inline-end);
+  max-width: calc(100% - var(--_pane-margin-inline-start) - var(--_pane-margin-inline-end));
+  inset: var(--webpage-top-app-bar-height) 0 var(--webpage-top-app-bar-height) calc(var(--_drawer-width) - var(--webpage-spacing-xl));
+}
+
+@media (max-width: 1500px) {
+  .panes {
+    inset: var(--webpage-top-app-bar-height) 0 var(--webpage-top-app-bar-height) 0;
+    max-width: calc(100% - var(--_pane-margin-inline-start) - var(--_pane-margin-inline-end));
+  }
+}
+
+@media (max-width: 600px) {
+  .pane {
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+    height: calc(100dvh - 2 * var(--webpage-top-app-bar-height) - var(--_pane-margin-block-end));
+  }
+}
