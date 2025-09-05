@@ -1,10 +1,19 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+// Import reusable components
 import TopAppBar from './components/TopAppBar';
 import ModalScrim from './components/ModalScrim';
 import BottomAppBar from './components/BottomAppBar';
 import PageContentPane from './components/PageContentPane';
 import ModalNavigationDrawer from './components/ModalNavigationDrawer';
+
+// Import navigation pages 
+import Home from './pages/Home';
+import Report from './pages/Report';
+import Updates from './pages/Updates';
+import Community from './pages/Community';
 
 function App() {
   useEffect(() => {
@@ -32,7 +41,14 @@ function App() {
       <TopAppBar isDrawerOpen={drawerOpen} onMenuClick={toggleNavigationDrawer} />
       <ModalScrim isDrawerOpen={drawerOpen} onScrimClick={toggleNavigationDrawer} />
       <ModalNavigationDrawer isDrawerOpen={drawerOpen} />
-      <PageContentPane />
+      <Routes>
+        <Route element={<PageContentPane />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/report" element={<Report />} />
+          <Route path="/updates" element={<Updates />} />
+          <Route path="/community" element={<Community />} />
+        </Route>
+      </Routes>
       <BottomAppBar />
     </>
   );
