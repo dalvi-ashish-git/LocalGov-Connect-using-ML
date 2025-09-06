@@ -42,13 +42,13 @@
 }
 
 .nav-container .nav-item span {
-  font-size: 14px;
+  font-size: 12.5px;
   color: var(--md-sys-color-on-surface-variant);
 }
 
 .nav-container .nav-item md-icon {
   font-size: 24px;
-  padding: 6px 24px;
+  padding: 4px 21px;
   border-radius: 9999px;
   color: var(--md-sys-color-on-surface-variant);
 }
@@ -79,7 +79,7 @@
 
   .nav-container .nav-item {
     gap: 8px;
-    padding: 4px 16px;
+    padding: 2px 16px;
     flex-direction: row;
     border-radius: 9999px;
     transition: background .2s;
@@ -96,8 +96,8 @@
   }
 
   .nav-container .nav-item.active md-icon {
-    background: none;
     color: inherit;
+    background: none;
   }
 }
 

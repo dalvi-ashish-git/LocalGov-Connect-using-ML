@@ -1,26 +1,27 @@
 import './BottomAppBar.css';
 import { NavLink } from 'react-router-dom';
 
+const tabs = [
+  { to: '/', icon: 'home', label: 'Home' },
+  { to: '/report', icon: 'post_add', label: 'Report' },
+  { to: '/updates', icon: 'update', label: 'Updates' },
+  { to: '/community', icon: 'groups', label: 'Community' },
+];
+
 function BottomAppBar() {
   return (
     <div className="bottom-app-bar">
       <div className="nav-container">
-        <NavLink to="/" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <md-icon>home</md-icon>
-          <span>Home</span>
-        </NavLink>
-        <NavLink to="/report" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <md-icon>post_add</md-icon>
-          <span>Report</span>
-        </NavLink>
-        <NavLink to="/updates" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <md-icon>update</md-icon>
-          <span>Updates</span>
-        </NavLink>
-        <NavLink to="/community" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-          <md-icon>groups</md-icon>
-          <span>Community</span>
-        </NavLink>
+        {tabs.map(tab => (
+          <NavLink
+            key={tab.to}
+            to={tab.to}
+            className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+          >
+            <md-icon>{tab.icon}</md-icon>
+            <span>{tab.label}</span>
+          </NavLink>
+        ))}
       </div>
     </div>
   );
