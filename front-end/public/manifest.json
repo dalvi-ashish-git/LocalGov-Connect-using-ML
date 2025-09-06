@@ -1,0 +1,15 @@
+{
+  "name": "LocalGov Connect",
+  "short_name": "LocalGov Connect",
+  "icons": [
+    {
+      "src": "/icons/localgov-connect.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}
