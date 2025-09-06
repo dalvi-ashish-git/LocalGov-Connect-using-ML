@@ -3,7 +3,6 @@
   z-index: 10;
   display: none;
   position: fixed;
-  overflow: hidden;
   inset: auto 0 0 0;
   align-items: center;
   box-sizing: border-box;
@@ -11,18 +10,100 @@
   height: var(--webpage-top-app-bar-height);
   background-color: var(--md-sys-color-surface-container);
   border-top: 1px solid var(--md-sys-color-outline-variant);
-  padding: var(--webpage-spacing-m) var(--webpage-spacing-l);
+  padding: var(--webpage-spacing-m) var(--webpage-spacing-m);
 }
 
 .bottom-app-bar .nav-container {
-  display: flex;
-  gap: 20px;
   width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.bottom-app-bar .nav-item:link,
+.bottom-app-bar .nav-item:visited,
+.bottom-app-bar .nav-item:active,
+.bottom-app-bar .nav-item:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-container {
   justify-content: space-evenly;
+}
+
+.nav-container .nav-item {
+  gap: 4px;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-container .nav-item span {
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.nav-container .nav-item md-icon {
+  font-size: 24px;
+  padding: 6px 24px;
+  border-radius: 9999px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.nav-container .nav-item.active span {
+  font-weight: bold;
+  color: var(--md-sys-color-secondary);
+}
+
+.nav-container .nav-item.active md-icon {
+  font-weight: 500;
+  font-variation-settings: 'FILL' 1;
+  color: var(--md-sys-color-on-secondary-container);
+  background: var(--md-sys-color-secondary-container);
 }
 
 @media (max-width: 900px) {
   .bottom-app-bar {
     display: flex;
+  }
+}
+
+@media (min-width: 600px) {
+  .nav-container {
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .nav-container .nav-item {
+    gap: 8px;
+    padding: 4px 16px;
+    flex-direction: row;
+    border-radius: 9999px;
+    transition: background .2s;
+  }
+
+  .nav-container .nav-item md-icon {
+    padding: 4px;
+    background: none;
+  }
+
+  .nav-container .nav-item.active {
+    color: var(--md-sys-color-on-secondary-container);
+    background: var(--md-sys-color-secondary-container);
+  }
+
+  .nav-container .nav-item.active md-icon {
+    background: none;
+    color: inherit;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-container .nav-item.active md-icon {
+    background: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
   }
 }

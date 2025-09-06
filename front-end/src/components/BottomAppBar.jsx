@@ -1,21 +1,26 @@
 import './BottomAppBar.css';
+import { NavLink } from 'react-router-dom';
 
 function BottomAppBar() {
   return (
     <div className="bottom-app-bar">
       <div className="nav-container">
-        <md-icon-button>
+        <NavLink to="/" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
           <md-icon>home</md-icon>
-        </md-icon-button>
-        <md-icon-button>
+          <span>Home</span>
+        </NavLink>
+        <NavLink to="/report" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
           <md-icon>post_add</md-icon>
-        </md-icon-button>
-        <md-icon-button>
+          <span>Report</span>
+        </NavLink>
+        <NavLink to="/updates" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
           <md-icon>update</md-icon>
-        </md-icon-button>
-        <md-icon-button>
+          <span>Updates</span>
+        </NavLink>
+        <NavLink to="/community" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
           <md-icon>groups</md-icon>
-        </md-icon-button>
+          <span>Community</span>
+        </NavLink>
       </div>
     </div>
   );
