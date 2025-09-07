@@ -69,6 +69,8 @@
   --webpage-top-app-bar-padding-block: 8px;
   --webpage-top-app-bar-height: calc(48px + 2 * var(--webpage-spacing-m));
   --_drawer-width: 300px;
+  --webpage-side-nav-rail-width: 96px;
+  --webpage-bottom-app-bar-height: calc(48px + 2 * var(--webpage-spacing-m));
   --_pane-margin-inline-start: var(--webpage-spacing-xl);
   --_pane-margin-inline-end: var(--webpage-spacing-l);
   --_pane-margin-block-end: var(--webpage-spacing-l);
