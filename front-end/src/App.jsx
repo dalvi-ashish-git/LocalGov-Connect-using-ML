@@ -40,7 +40,7 @@ function App() {
   return (
     <>
       <TopAppBar isDrawerOpen={drawerOpen} onMenuClick={toggleNavigationDrawer} />
-      <SideNavigationRail />
+      <SideNavigationRail isDrawerOpen={drawerOpen} onMenuClick={toggleNavigationDrawer} />
       <ModalScrim isDrawerOpen={drawerOpen} onScrimClick={toggleNavigationDrawer} />
       <ModalNavigationDrawer isDrawerOpen={drawerOpen} />
       <Routes>
