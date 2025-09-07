@@ -7,6 +7,7 @@ import TopAppBar from './components/TopAppBar';
 import ModalScrim from './components/ModalScrim';
 import BottomAppBar from './components/BottomAppBar';
 import PageContentPane from './components/PageContentPane';
+import SideNavigationRail from './components/SideNavigationRail';
 import ModalNavigationDrawer from './components/ModalNavigationDrawer';
 
 // Import navigation pages 
@@ -39,6 +40,7 @@ function App() {
   return (
     <>
       <TopAppBar isDrawerOpen={drawerOpen} onMenuClick={toggleNavigationDrawer} />
+      <SideNavigationRail />
       <ModalScrim isDrawerOpen={drawerOpen} onScrimClick={toggleNavigationDrawer} />
       <ModalNavigationDrawer isDrawerOpen={drawerOpen} />
       <Routes>
