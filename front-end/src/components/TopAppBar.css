@@ -13,16 +13,16 @@
 }
 
 .top-app-bar {
-  width: 100%;
   z-index: 12;
   display: flex;
   position: fixed;
   overflow: hidden;
-  inset: 0 0 auto 0;
   align-items: center;
   box-sizing: border-box;
   color: var(--md-sys-color-on-surface);
   height: var(--webpage-top-app-bar-height);
+  inset: 0 0 auto var(--webpage-side-nav-rail-width);
+  width: calc(100% - var(--webpage-side-nav-rail-width));
   background-color: var(--md-sys-color-surface-container);
   padding: var(--webpage-spacing-m) var(--webpage-spacing-l);
 }
@@ -53,12 +53,17 @@
   justify-content: flex-start;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 900px) {
   .start .home-button {
     display: none;
   }
 
   .start .menu-button {
     display: flex;
+  }
+
+  .top-app-bar {
+    width: 100%;
+    inset: 0 0 auto 0;
   }
 }

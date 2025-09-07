@@ -35,7 +35,7 @@
   gap: var(--_pane-margin-inline-end);
   margin-inline: var(--_pane-margin-inline-start) var(--_pane-margin-inline-end);
   max-width: calc(100% - var(--_pane-margin-inline-start) - var(--_pane-margin-inline-end));
-  inset: var(--webpage-top-app-bar-height) 0 var(--webpage-top-app-bar-height) calc(var(--_drawer-width) - var(--webpage-spacing-xl));
+  inset: var(--webpage-top-app-bar-height) 0 var(--webpage-top-app-bar-height) calc(var(--webpage-side-nav-rail-width) - var(--webpage-spacing-xl));
 }
 
 .pane.content-pane {
@@ -48,16 +48,16 @@
     max-width: 100vw;
     padding-inline: var(--webpage-spacing-xl);
   }
-
-  .panes {
-    inset: var(--webpage-top-app-bar-height) 0 var(--webpage-top-app-bar-height) 0;
-    max-width: calc(100% - var(--_pane-margin-inline-start) - var(--_pane-margin-inline-end));
-  }
 }
 
 @media (max-width: 900px) {
   .pane {
     height: calc(100dvh - 2 * var(--webpage-top-app-bar-height));
+  }
+
+  .panes {
+    inset: var(--webpage-top-app-bar-height) 0 var(--webpage-top-app-bar-height) 0;
+    max-width: calc(100% - var(--_pane-margin-inline-start) - var(--_pane-margin-inline-end));
   }
 }
 

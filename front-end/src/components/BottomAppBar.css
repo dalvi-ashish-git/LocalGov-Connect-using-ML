@@ -7,7 +7,7 @@
   align-items: center;
   box-sizing: border-box;
   color: var(--md-sys-color-on-surface);
-  height: var(--webpage-top-app-bar-height);
+  height: var(--webpage-bottom-app-bar-height);
   background-color: var(--md-sys-color-surface-container);
   border-top: 1px solid var(--md-sys-color-outline-variant);
   padding: var(--webpage-spacing-m) var(--webpage-spacing-m);
@@ -27,11 +27,11 @@
   color: inherit;
 }
 
-.nav-container {
+.bottom-app-bar .nav-container {
   justify-content: space-evenly;
 }
 
-.nav-container .nav-item {
+.bottom-app-bar .nav-container .nav-item {
   gap: 4px;
   display: flex;
   cursor: pointer;
@@ -41,24 +41,24 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.nav-container .nav-item span {
+.bottom-app-bar .nav-container .nav-item span {
   font-size: 12.5px;
   color: var(--md-sys-color-on-surface-variant);
 }
 
-.nav-container .nav-item md-icon {
+.bottom-app-bar .nav-container .nav-item md-icon {
   font-size: 24px;
   padding: 4px 21px;
   border-radius: 9999px;
   color: var(--md-sys-color-on-surface-variant);
 }
 
-.nav-container .nav-item.active span {
+.bottom-app-bar .nav-container .nav-item.active span {
   font-weight: bold;
   color: var(--md-sys-color-secondary);
 }
 
-.nav-container .nav-item.active md-icon {
+.bottom-app-bar .nav-container .nav-item.active md-icon {
   font-weight: 500;
   font-variation-settings: 'FILL' 1;
   color: var(--md-sys-color-on-secondary-container);
@@ -72,12 +72,12 @@
 }
 
 @media (min-width: 600px) {
-  .nav-container {
+  .bottom-app-bar .nav-container {
     justify-content: center;
     gap: 24px;
   }
 
-  .nav-container .nav-item {
+  .bottom-app-bar .nav-container .nav-item {
     gap: 8px;
     padding: 2px 16px;
     flex-direction: row;
@@ -85,24 +85,24 @@
     transition: background .2s;
   }
 
-  .nav-container .nav-item md-icon {
+  .bottom-app-bar .nav-container .nav-item md-icon {
     padding: 4px;
     background: none;
   }
 
-  .nav-container .nav-item.active {
+  .bottom-app-bar .nav-container .nav-item.active {
     color: var(--md-sys-color-on-secondary-container);
     background: var(--md-sys-color-secondary-container);
   }
 
-  .nav-container .nav-item.active md-icon {
+  .bottom-app-bar .nav-container .nav-item.active md-icon {
     color: inherit;
     background: none;
   }
 }
 
 @media (max-width: 600px) {
-  .nav-container .nav-item.active md-icon {
+  .bottom-app-bar .nav-container .nav-item.active md-icon {
     background: var(--md-sys-color-secondary-container);
     color: var(--md-sys-color-on-secondary-container);
   }
