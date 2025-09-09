@@ -43,6 +43,11 @@
   display: flex;
 }
 
+.pane .scroll-wrapper {
+  width: 100%;
+  padding-block: var(--webpage-spacing-xl);
+}
+
 @media (max-width: 1500px) {
   .content {
     max-width: 100vw;

@@ -25,7 +25,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
-  padding: var(--webpage-spacing-m) 0;
+  padding: var(--webpage-spacing-xs) 0;
 }
 
 .side-nav-rail .nav-item:link,

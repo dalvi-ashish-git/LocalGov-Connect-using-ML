@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 function PageContentPane() {
   return (
     <div className="panes">
-      <div className="pane">
+      <div className="pane content-pane">
         <div className="scroll-wrapper">
           <div className="content">
             <main className="page-content">
