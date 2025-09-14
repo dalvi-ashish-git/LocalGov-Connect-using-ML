@@ -1,0 +1,86 @@
+.home-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.greeting-card {
+  background-color: var(--md-sys-color-surface-variant);
+  border-radius: var(--catalog-image-border-radius, 12px);
+  padding: 32px;
+  text-align: center;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-bottom: 32px;
+}
+
+.greeting-card h1 {
+  margin-bottom: 8px;
+  font-weight: 475;
+}
+
+.greeting-card p {
+  font-size: var(--catalog-title-l-font-size, 1rem);
+}
+
+.section {
+  margin-bottom: 32px;
+}
+
+.section h2 {
+  margin-bottom: 16px;
+  color: var(--md-sys-color-primary);
+}
+
+.issues-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.issue-card {
+  background-color: var(--md-sys-color-surface-variant);
+  border-radius: var(--catalog-image-border-radius, 12px);
+  padding: 16px;
+}
+
+.issue-card h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--md-sys-color-secondary);
+}
+
+.issue-card p {
+  margin: 4px 0;
+}
+
+.images-container {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.images-container img {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.timestamp {
+  font-size: 0.85rem;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+@media (min-width: 768px) {
+  .home-container {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .greeting-card {
+    padding: 24px;
+  }
+}
