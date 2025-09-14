@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import supabase from './utils/supabaseClient';
 import { Routes, Route } from 'react-router-dom';
 
 // Import reusable components
@@ -12,30 +13,34 @@ import ModalNavigationDrawer from './components/ModalNavigationDrawer';
 
 // Import navigation pages 
 import Home from './pages/Home';
+import Login from './pages/Login';
 import Report from './pages/Report';
 import Updates from './pages/Updates';
 import Community from './pages/Community';
 
 function App() {
-  useEffect(() => {
-    const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--md-sys-color-surface-container').trim();
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+  const [session, setSession] = useState(null);
 
-    if(metaThemeColor) {
-      metaThemeColor.setAttribute('content', themeColor);
-    }
-    else {
-      const metaTag = document.createElement('meta');
-      metaTag.name = 'theme-color';
-      metaTag.content = themeColor;
-      document.head.appendChild(metaTag);
-    }
+  useEffect(() => {
+    const currentSession = supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => listener.subscription.unsubscribe();
   }, []);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleNavigationDrawer = () => {
     setDrawerOpen((prev) => !(prev));
   };
+
+//  if (!session) {
+  //  return <Login />;
+ // }
 
   return (
     <>
