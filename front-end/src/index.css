@@ -1,47 +1,4 @@
 /*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-      CSS COLOR VARIABLES FOR STYLING MD3 COMPONENTS
-  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
-:root, :host {
-  --md-sys-color-background: #f7f9ff;
-  --md-sys-color-on-background: #171c21;
-  --md-sys-color-surface: #f7f9ff;
-  --md-sys-color-surface-dim: #d6dae1;
-  --md-sys-color-surface-bright: #f7f9ff;
-  --md-sys-color-surface-container-lowest: #ffffff;
-  --md-sys-color-surface-container-low: #f0f4fa;
-  --md-sys-color-surface-container: #eaeef5;
-  --md-sys-color-surface-container-high: #e4e8ef;
-  --md-sys-color-surface-container-highest: #dfe3e9;
-  --md-sys-color-on-surface: #171c21;
-  --md-sys-color-surface-variant: #dae3ef;
-  --md-sys-color-on-surface-variant: #3e4851;
-  --md-sys-color-inverse-surface: #2c3136;
-  --md-sys-color-inverse-on-surface: #edf1f7;
-  --md-sys-color-outline: #6f7882;
-  --md-sys-color-outline-variant: #bec7d2;
-  --md-sys-color-shadow: #000000;
-  --md-sys-color-scrim: #000000;
-  --md-sys-color-surface-tint: #006495;
-  --md-sys-color-primary: #006495;
-  --md-sys-color-on-primary: #ffffff;
-  --md-sys-color-primary-container: #29abf6;
-  --md-sys-color-on-primary-container: #001929;
-  --md-sys-color-inverse-primary: #8fcdff;
-  --md-sys-color-secondary: #3d627f;
-  --md-sys-color-on-secondary: #ffffff;
-  --md-sys-color-secondary-container: #bee0ff;
-  --md-sys-color-on-secondary-container: #214763;
-  --md-sys-color-tertiary: #8342a1;
-  --md-sys-color-on-tertiary: #ffffff;
-  --md-sys-color-tertiary-container: #cc86eb;
-  --md-sys-color-on-tertiary-container: #29003c;
-  --md-sys-color-error: #ba1a1a;
-  --md-sys-color-on-error: #ffffff;
-  --md-sys-color-error-container: #ffdad6;
-  --md-sys-color-on-error-container: #410002;
-}
-
-/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       CSS VARIABLES TO BE USED THROUGHOUT THE PROJECT
   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
 :root {
