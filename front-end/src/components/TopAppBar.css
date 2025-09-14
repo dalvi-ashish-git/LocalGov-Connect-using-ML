@@ -16,7 +16,7 @@
   z-index: 12;
   display: flex;
   position: fixed;
-  overflow: hidden;
+  overflow: visible;
   align-items: center;
   box-sizing: border-box;
   color: var(--md-sys-color-on-surface);

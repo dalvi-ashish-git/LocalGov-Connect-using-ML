@@ -1,10 +1,8 @@
 import './TopAppBar.css';
+import './theme-settings-menu.js';
 import { useRef, useState } from 'react';
 
 function TopAppBar({isDrawerOpen, onMenuClick}) {
-  const themeAnchorRef = useRef(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <div className="top-app-bar">
       <div className="start">
@@ -21,29 +19,7 @@ function TopAppBar({isDrawerOpen, onMenuClick}) {
         <md-icon-button>
           <md-icon>search</md-icon>
         </md-icon-button>
-        <md-icon-button
-          ref={themeAnchorRef}
-          onClick={() => setMenuOpen(prev => !prev)}
-        >
-          <md-icon>palette</md-icon>
-        </md-icon-button>
-
-        <md-menu
-          open={menuOpen}
-          anchor={themeAnchorRef.current}
-          onClose={() => setMenuOpen(false)}
-        >
-        <md-menu-item>
-      <div slot="headline">Apple</div>
-    </md-menu-item>
-    <md-menu-item>
-      <div slot="headline">Banana</div>
-    </md-menu-item>
-    <md-menu-item>
-      <div slot="headline">Cucumber</div>
-    </md-menu-item>
-        </md-menu>
-
+        <theme-settings-menu></theme-settings-menu>
       </div>
     </div>
   );
