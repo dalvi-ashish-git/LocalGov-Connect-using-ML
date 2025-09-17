@@ -14,19 +14,28 @@ import ModalNavigationDrawer from './components/ModalNavigationDrawer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Report from './pages/Report';
+import Profile from './pages/Profile';
 import Updates from './pages/Updates';
 import Community from './pages/Community';
+
+import { handleCitizen } from './services/citizenManager.js';
 
 function App() {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
-    const currentSession = supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
+      if (session && session.user) {
+        handleCitizen();
+      }
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      if (session && session.user) {
+        handleCitizen();
+      }
     });
 
     return () => listener.subscription.unsubscribe();
@@ -37,9 +46,9 @@ function App() {
     setDrawerOpen((prev) => !(prev));
   };
 
-//  if (!session) {
-  //  return <Login />;
- // }
+  if (!session) {
+    return <Login />;
+  }
 
   return (
     <>
@@ -52,7 +61,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/report" element={<Report />} />
           <Route path="/updates" element={<Updates />} />
-          <Route path="/community" element={<Community />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
       <BottomAppBar />
