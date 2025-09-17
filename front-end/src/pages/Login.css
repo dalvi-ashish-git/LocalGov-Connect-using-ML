@@ -1,0 +1,95 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+  height: 100dvh;
+  width: 100vw;
+  background-color: var(--md-sys-color-surface-container);
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.login-card {
+  background-color: var(--md-sys-color-surface);
+  border-radius: var(--catalog-image-border-radius, 12px);
+  padding: 32px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.login-card h1 {
+  margin-bottom: 24px;
+  color: var(--md-sys-color-primary);
+  font-weight: 475;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.divider span {
+  padding: 0 16px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--md-sys-color-outline);
+}
+
+.md-filled-button {
+  width: 100%;
+}
+
+.extra-options {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 0.9rem;
+}
+
+.extra-options .link {
+  color: var(--md-sys-color-primary);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.extra-options .separator {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.message {
+  margin-top: 16px;
+  color: var(--md-sys-color-error);
+}
+
+@media (max-width: 600px) {
+  .login-card {
+    padding: 24px;
+    max-height: 100vh;
+  }
+}
+
+@media (max-height: 600px) {
+  .login-container {
+    align-items: flex-start;
+    padding-top: 20px;
+  }
+}
