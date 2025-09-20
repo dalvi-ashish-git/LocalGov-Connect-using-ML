@@ -1,9 +1,44 @@
 import './Login.css';
-import { useState } from 'react';
 import '../components/google-button.js';
+import { useState, useEffect } from 'react';
 import supabase from '../utils/supabaseClient';
+import { useNavigate } from 'react-router-dom';
+import { handleCitizen } from '../services/citizenManager.js';
 
-function Login() {
+function Login({ userType }) {
+  const navigate = useNavigate();
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      if (session && session.user) {
+        handleCitizen();
+      }
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      if (session && session.user) {
+        handleCitizen();
+        redirectAfterLogin();
+      }
+    });
+
+    return () => listener.subscription.unsubscribe();
+  }, []);
+
+  const redirectAfterLogin = () => {
+    if (userType === 'citizen') {
+      navigate('/citizen/home');
+    }
+    else if (userType === 'gov') {
+      navigate('/');
+    }
+  };
+
+
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -91,7 +126,7 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h1>Citizen Login</h1>
+        <h1>{userType === 'citizen' ? 'Citizen' : 'Official'} Login</h1>
 
         <form onSubmit={handleEmailLogin}>
           <md-outlined-text-field
