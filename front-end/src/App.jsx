@@ -6,12 +6,12 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+       {/* <Route path="/" element={<LandingPage />} />
 
         <Route path="/citizen/login" element={<Login userType="citizen" />} />
         <Route path="/gov/login" element={<Login userType="gov" />} />
-
-        <Route path="/citizen/*" element={<CitizenLayout />}>
+*/}
+        <Route path="/*" element={<CitizenLayout />}>
           <Route index element={<Navigate to="home" replace />} />
           <Route path="home" element={<Home />} />
           <Route path="report" element={<Report />} />
