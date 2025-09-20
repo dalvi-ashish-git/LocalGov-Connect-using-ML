@@ -140,7 +140,7 @@ function Profile() {
   if (loading) {
     return (
       <div className="profile-card">
-        <p>Loading...</p>
+        <md-circular-progress indeterminate></md-circular-progress>
       </div>
     );
   }

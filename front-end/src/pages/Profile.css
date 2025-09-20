@@ -53,3 +53,14 @@
     width: 100%;
   }
 }
+
+
+
+
+
+
+
+.profile-card {
+  align-self: flex-start; /* prevent stretching inside flex parent */
+  height: auto;           /* explicitly say: fit to content */
+}
