@@ -110,13 +110,14 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .scroll-wrapper {
-  display: flex;
-  flex-direction: column;
+  flex-grow: 1;
   height: 100%;
+  display: flex;
   max-height: 100%;
   overflow-y: auto;
   border-radius: inherit;
   box-sizing: border-box;
+  flex-direction: column;
   background-color: transparent;
   transition: opacity 0.3s linear;
 }
