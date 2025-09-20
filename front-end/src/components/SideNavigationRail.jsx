@@ -11,13 +11,11 @@ function SideNavigationRail({isDrawerOpen, onMenuClick}) {
           <md-icon slot="selected">menu</md-icon>
           <md-icon>menu_open</md-icon>
         </md-icon-button>
-        <md-fab variant="primary" aria-label="Edit">
-          <md-icon slot="icon">edit</md-icon>
-        </md-fab>
         {tabs.map(tab => (
           <NavLink
             key={tab.to}
             to={tab.to}
+            end
             className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
           >
             <md-icon>{tab.icon}</md-icon>
