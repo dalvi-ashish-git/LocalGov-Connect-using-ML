@@ -105,7 +105,14 @@ md-icon-button:not(:defined) {
   visibility: hidden;
 }
 
+h1, h2, h3, h4, h5, h6, p {
+  color: var(--md-sys-color-on-background);
+}
+
 .scroll-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   max-height: 100%;
   overflow-y: auto;
   border-radius: inherit;
