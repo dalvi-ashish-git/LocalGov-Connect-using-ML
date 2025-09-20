@@ -1,3 +1,56 @@
+.report-page {
+  position: relative; /* allow absolute positioning of FAB */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: var(--webpage-spacing-l);
+}
+
+/* Empty state */
+.empty-state {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--webpage-spacing-s);
+  color: var(--md-sys-color-on-background);
+}
+
+/* Heading */
+.report-heading {
+  font-size: var(--webpage-font-size-l);
+  font-weight: 500;
+  margin-block: var(--webpage-spacing-m);
+  color: var(--md-sys-color-on-background);
+}
+
+/* List grows and scrolls if needed */
+.report-page md-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-block-end: var(--webpage-spacing-l);
+}
+
+/* FAB — absolute positioning inside report-page */
+.fab {
+  position: absolute;
+  bottom: var(--webpage-spacing-l);
+  right: var(--webpage-spacing-l);
+  transition: none; /* prevent sliding animation */
+}
+
+/* Larger screens: top-left instead of bottom-right */
+@media (min-width: 900px) {
+  .fab {
+    top: 0;
+  }
+}
+
+
 .form-container {
   display: flex;
   padding: 12px 24px 24px 24px;
@@ -23,7 +76,7 @@
   font-weight: 475;
   text-align: center;
   margin-bottom: 22px;
-  color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-background);
 }
 
 .form-container form {
