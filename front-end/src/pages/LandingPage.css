@@ -1,0 +1,291 @@
+/* Base container */
+.landing-container {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  max-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Top Bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--md-sys-color-surface);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--md-sys-color-primary);
+}
+
+.search-login {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.search-field {
+  width: 240px;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 5rem 2rem 6rem;
+  background: linear-gradient(
+    180deg,
+    var(--md-sys-color-primary-container),
+    var(--md-sys-color-surface)
+  );
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.hero-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Wave Divider */
+.wave-container {
+  position: relative;
+  height: 100px;
+  overflow: hidden;
+  background: var(--md-sys-color-surface);
+}
+
+.wave {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-size: 50% 100%;
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    var(--md-sys-color-primary-container) 50%,
+    transparent 51%
+  );
+  animation: waveMove 8s linear infinite;
+}
+
+.wave:nth-child(2) {
+  top: 10px;
+  opacity: 0.6;
+  animation-duration: 12s;
+}
+
+@keyframes waveMove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+/* Features Section */
+.features-section {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: var(--md-sys-color-surface);
+}
+
+.features-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.feature-card {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/* Testimonials Section */
+.landing-testimonials {
+  padding: 4rem 2rem;
+  background: var(--md-sys-color-surface-variant);
+  text-align: center;
+}
+
+.testimonial-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.testimonial {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  font-style: italic;
+}
+
+/* Call to Action */
+.get-started-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.get-started-section h2 {
+  margin-bottom: 1rem;
+}
+
+.get-started-section p {
+  margin-bottom: 2rem;
+}
+
+/* Footer */
+.landing-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+  background: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .search-login {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+}
+
+
+
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.landing-container {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+@media (min-width: 1600px) {
+  .landing-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+
+
+/* --- SVG Wave (robust, scales to any width) --- */
+.wave-container {
+  position: relative;
+  width: 100vw;               /* span the full device width */
+  left: 50%;
+  transform: translateX(-50%);/* ensure perfect center if parent adds padding */
+  height: 120px;              /* adjust as needed */
+  overflow: visible;
+  background: var(--md-sys-color-surface); /* section background */
+  z-index: 0;
+}
+
+/* SVG fills the container - we intentionally set width > 100% to allow smooth looping */
+.wave-svg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 200%;        /* twice the container width for a seamless horizontal loop */
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  will-change: transform;
+  transform: translateX(0);
+}
+
+/* Foreground wave: faster */
+.wave1 {
+  z-index: 0;
+  opacity: 1;
+  animation: waveMoveFore 10s linear infinite;
+}
+
+/* Background wave: slower, semi-transparent */
+.wave2 {
+  z-index: 0;
+  opacity: 0.6;
+  animation: waveMoveBack 18s linear infinite;
+  bottom: 6px; /* slight vertical offset for depth */
+}
+
+/* Animations: translate the SVG horizontally by half its width (200% -> -50%) */
+@keyframes waveMoveFore {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* moves left by half (seamless repeat) */
+}
+@keyframes waveMoveBack {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Make wave taller on large screens if you like */
+@media (min-width: 1400px) {
+  .wave-container { height: 180px; }
+  .wave-svg { width: 180%; } /* adjust loop distance for aesthetic */
+}
+
+/* Small-screen tweak */
+@media (max-width: 480px) {
+  .wave-container { height: 80px; }
+  .wave-svg { width: 250%; } /* keep waves dense on tiny screens */
+}
