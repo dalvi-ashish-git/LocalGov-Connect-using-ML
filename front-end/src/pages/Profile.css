@@ -4,7 +4,6 @@
   flex-direction: column;
   padding: 12px 24px 24px 24px;
   border-radius: var(--webpage-shape-l);
-  padding-inline: var(--webpage-spacing-xl);
   background-color: var(--md-sys-color-surface-variant);
 }
 
@@ -50,17 +49,12 @@
 
 @media (max-width: 900px) {
   .profile-card {
-    width: 100%;
   }
 }
 
 
 
-
-
-
-
 .profile-card {
-  align-self: flex-start; /* prevent stretching inside flex parent */
-  height: auto;           /* explicitly say: fit to content */
+  align-self: flex-start;
+  height: auto;
 }
