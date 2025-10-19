@@ -1,0 +1,67 @@
+.form-container {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 24px 24px 24px;
+  border-radius: var(--webpage-shape-l);
+  background: var(--md-sys-color-surface-variant);
+}
+
+.file-upload {
+  gap: 12px;
+  display: flex;
+  align-items: center;
+}
+
+#fileNames {
+  font-size: 0.9rem;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.form-container h1 {
+  font-weight: 475;
+  text-align: center;
+  margin-bottom: 22px;
+  color: var(--md-sys-color-on-background);
+}
+
+.form-container form {
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container .row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: var(--webpage-spacing-m);
+  margin-top: var(--webpage-spacing-l);
+}
+
+.form-container .row md-filled-button,
+.form-container .row md-outlined-button {
+  flex: 1;
+  min-width: 120px;
+}
+
+.form-container input[type="file"] {
+  display: none;
+}
+
+.form-container md-outlined-text-field[type="textarea"] {
+  min-height: 96px;
+  resize: vertical;
+}
+
+@media (min-width: 900px) {
+  .form-container {
+    min-width: 600px;
+    margin: 40px auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-container {
+  }
+}
