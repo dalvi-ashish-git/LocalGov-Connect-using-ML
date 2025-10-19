@@ -7,7 +7,7 @@ function PageContentPane() {
       <div className="pane content-pane">
         <div className="scroll-wrapper">
           <div className="content">
-            <main className="page-content">
+            <main>
               <Outlet />
             </main>
           </div>

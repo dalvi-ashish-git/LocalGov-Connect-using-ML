@@ -1,20 +1,14 @@
 .content {
-  width: 100%;
   flex-grow: 1;
   display: flex;
+  align-items: center;
   box-sizing: border-box;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   padding-inline: var(--webpage-spacing-xl);
 }
 
-.content .page-content {
-  width: 100%;
-  flex-grow: 1;
-  display: flex;
-}
-
 .pane {
-  width: 100%;
   overflow: auto;
   box-sizing: border-box;
   border-radius: var(--webpage-shape-xl);
@@ -44,7 +38,7 @@
 }
 
 .pane .scroll-wrapper {
-  width: 100%;
+  flex-grow: 1;
   padding-block: var(--webpage-spacing-xl);
 }
 
