@@ -1,86 +1,144 @@
-.home-container {
-  max-width: 900px;
-  margin: 20px auto;
-  padding: 16px;
-  font-family: Arial, sans-serif;
-}
-
-.greeting-card {
-  background-color: var(--md-sys-color-surface-variant);
-  border-radius: var(--catalog-image-border-radius, 12px);
-  padding: 32px;
-  text-align: center;
-  color: var(--md-sys-color-on-surface-variant);
-  margin-bottom: 32px;
-}
-
-.greeting-card h1 {
-  margin-bottom: 8px;
-  font-weight: 475;
-}
-
-.greeting-card p {
-  font-size: var(--catalog-title-l-font-size, 1rem);
-}
-
-.section {
-  margin-bottom: 32px;
-}
-
-.section h2 {
-  margin-bottom: 16px;
-  color: var(--md-sys-color-primary);
-}
-
-.issues-list {
+.citizen-home {
+  padding: var(--webpage-spacing-l);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--webpage-spacing-l);
 }
 
-.issue-card {
+/* Welcome Header */
+.welcome-card {
   background-color: var(--md-sys-color-surface-variant);
-  border-radius: var(--catalog-image-border-radius, 12px);
-  padding: 16px;
-}
-
-.issue-card h3 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  color: var(--md-sys-color-secondary);
-}
-
-.issue-card p {
-  margin: 4px 0;
-}
-
-.images-container {
+  border-radius: var(--webpage-shape-l);
+  padding: var(--webpage-spacing-l);
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.images-container img {
-  max-width: 100px;
-  max-height: 100px;
-  border-radius: 4px;
+.welcome-card h1 {
+  font-size: var(--md-sys-typescale-headline-small-size, 1.5rem);
+  color: var(--md-sys-color-on-surface);
+  margin: 0;
+}
+
+.welcome-card p {
+  font-size: var(--md-sys-typescale-body-medium-size, 0.9rem);
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 0.25rem 0;
+}
+
+.profile-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   object-fit: cover;
 }
 
-.timestamp {
-  font-size: 0.85rem;
+/* Card Sections */
+.card-section {
+  background-color: var(--md-sys-color-surface-container);
+  border-radius: var(--webpage-shape-l);
+  padding: var(--webpage-spacing-l);
+}
+
+.card-section h2 {
+  font-size: var(--md-sys-typescale-title-medium-size, 1.1rem);
+  margin-bottom: var(--webpage-spacing-m);
+  color: var(--md-sys-color-on-surface);
+}
+
+/* Issues */
+.issue-card {
+  background-color: var(--md-sys-color-surface-variant);
+  border-radius: var(--webpage-shape-m);
+  padding: var(--webpage-spacing-m);
+  margin-bottom: var(--webpage-spacing-m);
+}
+
+.issue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.issue-title {
+  font-weight: 600;
+}
+
+.status-chip {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: var(--webpage-shape-s);
+  text-transform: capitalize;
+}
+
+.status-chip.pending {
+  background-color: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+}
+
+.status-chip["in progress"],
+.status-chip.in\ progress {
+  background-color: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+.status-chip.resolved {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.issue-category,
+.issue-date {
+  font-size: 0.8rem;
   color: var(--md-sys-color-on-surface-variant);
 }
 
-@media (min-width: 768px) {
-  .home-container {
-    padding: 32px;
-  }
+/* Updates */
+.update-card {
+  background-color: var(--md-sys-color-surface-variant);
+  border-radius: var(--webpage-shape-m);
+  padding: var(--webpage-spacing-m);
+  margin-bottom: var(--webpage-spacing-s);
+  font-size: 0.9rem;
+  color: var(--md-sys-color-on-surface);
 }
 
-@media (max-width: 600px) {
-  .greeting-card {
-    padding: 24px;
-  }
+/* Buttons */
+.md-button {
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  border-radius: var(--webpage-shape-s);
+  padding: 8px 16px;
+  transition: background-color 0.2s;
+}
+
+.md-button.primary {
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+}
+
+.md-button.text {
+  background: none;
+  color: var(--md-sys-color-primary);
+  padding: 4px 0;
+}
+
+/* Floating Action Button */
+.fab {
+  position: fixed;
+  bottom: var(--webpage-spacing-l);
+  right: var(--webpage-spacing-l);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
