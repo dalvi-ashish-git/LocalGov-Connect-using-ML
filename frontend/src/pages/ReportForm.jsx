@@ -1,5 +1,6 @@
 import './ReportForm.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import supabase from '../utils/supabaseClient';
 import categories from '../utils/selectCategories.js';
 
@@ -11,6 +12,8 @@ function ReportForm() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('Fill all the details');
   const [fileNames, setFileNames] = useState("No files selected");
+  const [processingStep, setProcessingStep] = useState('');
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -39,16 +42,20 @@ function ReportForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMessage('');
+    setMessage('Processing your report...');
+    setProcessingStep('validating');
 
     try {
       if (!title || !description || !category || files.length === 0) {
         throw new Error('Please fill in all required fields.');
       }
 
+      setProcessingStep('uploading');
+      setMessage('Uploading images...');
       const fileUrls = [];
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
+        setMessage(`Uploading image ${i + 1} of ${files.length}...`);
         const { data: uploadData, error: uploadError } = await supabase.storage
           .from('civic_issues_images')
           .upload(`public/${Date.now()}-${file.name}`, file);
@@ -62,6 +69,8 @@ function ReportForm() {
         fileUrls.push(publicUrlData.publicUrl);
       }
 
+      setProcessingStep('submitting');
+      setMessage('Submitting report...');
       const { error: insertError } = await supabase
         .from('civic_issues')
         .insert([
@@ -71,11 +80,22 @@ function ReportForm() {
             category,
             status: 'pending',
             image_urls: fileUrls,
+            // provide numeric defaults to satisfy NOT NULL constraints in DB
+            latitude: 0.0,
+            longitude: 0.0,
+            address: '',
+            // explicitly set gov-related fields to null to avoid auth.uid() default or invalid FK
+            gov_official_id: null,
+            resolved_by: null,
+            last_status_changed_by: null,
+            last_status_changed_at: null,
+            resolution_images: null,
           },
         ]);
 
       if (insertError) throw insertError;
 
+      setProcessingStep('success');
       setTitle('');
       setDescription('');
       setCategory('');
@@ -84,6 +104,7 @@ function ReportForm() {
       setMessage('Issue reported successfully!');
     } catch (err) {
       console.error('Failed to report issue:', err);
+      setProcessingStep('error');
       setMessage(err.message || 'Failed to report issue. Please try again.');
     }
 
@@ -101,6 +122,13 @@ function ReportForm() {
 
   return (
     <div className="form-container">
+      <md-text-button
+        onClick={() => navigate('/citizen/report')}
+        aria-label="Back to list"
+      >
+        <md-icon slot="icon">arrow_back</md-icon>
+        Back
+      </md-text-button>
       <h1>Report an Issue</h1>
       <form onSubmit={handleSubmit}>
         <md-outlined-text-field label="Issue Title" maxlength="100" supporting-text="*required" placeholder="eg: Water leakage near Main Street" value={title} onChange={(e) => setTitle(e.target.value)} required></md-outlined-text-field>
@@ -120,7 +148,24 @@ function ReportForm() {
           </md-filled-button>
           <span id="fileNames">{fileNames}</span>
         </div>
-        {message || <p className="message">{message}</p>}
+        {message && (
+          <div className={`message-box ${
+            processingStep === 'success' ? 'success' : 
+            processingStep === 'error' ? 'error' : 
+            'processing'
+          }`}>
+            {loading ? (
+              <md-circular-progress indeterminate style={{ width: '20px', height: '20px' }}></md-circular-progress>
+            ) : (
+              <md-icon>
+                {processingStep === 'success' ? 'check_circle' : 
+                 processingStep === 'error' ? 'error' : 
+                 'info'}
+              </md-icon>
+            )}
+            {message}
+          </div>
+        )}
         <div className="row">
           <md-filled-button type="submit" disabled={loading}>{loading ? 'Reporting...' : 'Submit'}</md-filled-button>
           <md-outlined-button type="reset" onClick={handleReset}>Reset</md-outlined-button>
