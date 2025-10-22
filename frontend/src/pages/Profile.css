@@ -1,6 +1,5 @@
 .profile-card {
   display: flex;
-  max-width: 800px;
   flex-direction: column;
   padding: 12px 24px 24px 24px;
   border-radius: var(--webpage-shape-l);
@@ -42,19 +41,16 @@
 
 @media (min-width: 900px) {
   .profile-card {
+    width: 600px;
     min-width: 600px;
+    max-width: 800px;
     margin: 40px auto;
   }
 }
 
 @media (max-width: 900px) {
   .profile-card {
+    align-self: flex-start;
+    height: auto;
   }
-}
-
-
-
-.profile-card {
-  align-self: flex-start;
-  height: auto;
 }
