@@ -14,7 +14,7 @@ function App() {
         <Route path="/citizen/*" element={<CitizenLayout />}>
           <Route index element={<Navigate to="home" replace />} />
           <Route path="home" element={<Home />} />
-          <Route path="report" element={<Report />} />
+          <Route path="report/*" element={<Report />} />
           <Route path="updates" element={<Updates />} />
           <Route path="profile" element={<Profile />} />
         </Route>
