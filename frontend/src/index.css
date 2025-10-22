@@ -39,7 +39,9 @@
         FOR DEVICES WITH SMALL SCREEN WIDTH SIZES
   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
 @media screen and (max-width: 1500px) {
-  --_pane-margin-inline-start: var(--webpage-spacing-xl);
+  :root {
+    --_pane-margin-inline-start: var(--webpage-spacing-xl);
+  }
 }
 
 @media screen and (max-width: 600px) {
