@@ -15,7 +15,6 @@ function SideNavigationRail({isDrawerOpen, onMenuClick}) {
           <NavLink
             key={tab.to}
             to={tab.to}
-            end
             className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
           >
             <md-icon>{tab.icon}</md-icon>
