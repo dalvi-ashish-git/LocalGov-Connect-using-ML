@@ -29,7 +29,7 @@ class GoogleButton extends LitElement {
       -webkit-user-select: none;
       -ms-user-select: none;
       -webkit-appearance: none;
-      background-color: var(--md-sys-color-surface);
+      background-color: var(--md-sys-color-surface-container-lowest);
       background-image: none;
       border: 1px solid var(--md-sys-color-outline);
       -webkit-border-radius: 20px;
