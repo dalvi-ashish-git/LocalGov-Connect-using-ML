@@ -9,8 +9,10 @@
   color: var(--md-sys-color-on-surface);
   height: var(--webpage-bottom-app-bar-height);
   background-color: var(--md-sys-color-surface-container);
-  border-top: 1px solid var(--md-sys-color-outline-variant);
   padding: var(--webpage-spacing-m) var(--webpage-spacing-m);
+  /* overlay opacity tokens for hover/pressed states (tweak here to affect all sizes) */
+  --nav-overlay-hover-opacity: 0.06;
+  --nav-overlay-pressed-opacity: 0.22;
 }
 
 .bottom-app-bar .nav-container {
@@ -51,6 +53,46 @@
   padding: 4px 21px;
   border-radius: 9999px;
   color: var(--md-sys-color-on-surface-variant);
+  position: relative;
+  overflow: hidden;
+  transition: background-color .18s ease, opacity .12s ease;
+}
+
+.bottom-app-bar .nav-container .nav-item md-icon > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* base overlay for darkening ripple on bottom nav (scoped to non-active items) */
+.bottom-app-bar .nav-container .nav-item:not(.active) md-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, transparent 41%);
+  opacity: 0;
+  transition: width .22s ease, height .22s ease, opacity .16s ease, transform .22s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bottom-app-bar .nav-container .nav-item:not(.active) md-icon:hover::after,
+.bottom-app-bar .nav-container .nav-item:not(.active) md-icon:focus-visible::after {
+  width: 220%;
+  height: 220%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: var(--nav-overlay-hover-opacity);
+}
+
+.bottom-app-bar .nav-container .nav-item:not(.active) md-icon:active::after {
+  width: 220%;
+  height: 220%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: var(--nav-overlay-pressed-opacity);
 }
 
 .bottom-app-bar .nav-container .nav-item.active span {
@@ -90,6 +132,57 @@
     background: none;
   }
 
+  /* On medium+ screens the whole nav-item is a pill (icon + label) so move the overlay to the .nav-item
+     and disable the per-icon pseudo-element to avoid double overlays. */
+  .bottom-app-bar .nav-container .nav-item:not(.active) {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bottom-app-bar .nav-container .nav-item:not(.active) > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* disable per-icon overlay on medium screens */
+  .bottom-app-bar .nav-container .nav-item md-icon::after {
+    display: none;
+  }
+
+  .bottom-app-bar .nav-container .nav-item:not(.active)::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%) scale(0);
+  border-radius: inherit;
+  /* use a solid overlay so the shape follows the pill border-radius exactly */
+  background: rgba(0,0,0,1);
+    opacity: 0;
+    transition: width .22s ease, height .22s ease, opacity .16s ease, transform .22s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* On medium screens apply the same overlay but to the whole nav-item pill.
+     Use border-radius: inherit so the overlay matches the pill shape. */
+  .bottom-app-bar .nav-container .nav-item:not(.active):hover::after {
+    width: 220%;
+    height: 220%;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: var(--nav-overlay-hover-opacity);
+  }
+
+  .bottom-app-bar .nav-container .nav-item:not(.active):active::after,
+  .bottom-app-bar .nav-container .nav-item:not(.active):focus-visible::after {
+    width: 220%;
+    height: 220%;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: var(--nav-overlay-pressed-opacity);
+  }
+
   .bottom-app-bar .nav-container .nav-item.active {
     color: var(--md-sys-color-on-secondary-container);
     background: var(--md-sys-color-secondary-container);
@@ -102,6 +195,10 @@
 }
 
 @media (max-width: 600px) {
+  .bottom-app-bar {
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+  }
+  
   .bottom-app-bar .nav-container .nav-item.active md-icon {
     background: var(--md-sys-color-secondary-container);
     color: var(--md-sys-color-on-secondary-container);

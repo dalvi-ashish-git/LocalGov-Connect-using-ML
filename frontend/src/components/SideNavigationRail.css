@@ -55,6 +55,14 @@
   padding: 4px 21px;
   border-radius: 9999px;
   color: var(--md-sys-color-on-surface-variant);
+  transition: background-color .18s ease, opacity .12s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.side-nav-rail .nav-container .nav-item md-icon > * {
+  position: relative;
+  z-index: 1;
 }
 
 .side-nav-rail .nav-container .nav-item.active span {
@@ -66,7 +74,53 @@
   font-weight: 500;
   font-variation-settings: 'FILL' 1;
   color: var(--md-sys-color-on-secondary-container);
-  background: var(--md-sys-color-secondary-container);
+  background-color: var(--md-sys-color-secondary-container);
+}
+
+.side-nav-rail .nav-container .nav-item:not(.active) md-icon:hover {
+  /* MD3 hover: use overlay for subtle darkening; avoid changing the background-color which can conflict with active styling */
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* subtle radial 'ripple' darkening overlay implemented via pseudo-element */
+.side-nav-rail .nav-container .nav-item:not(.active) md-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  /* use solid black overlay and rely on opacity to control darkness so it is visibly darker on press */
+  background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 40%, transparent 41%);
+  opacity: 0;
+  transition: width .22s ease, height .22s ease, opacity .16s ease, transform .22s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.side-nav-rail .nav-container .nav-item:not(.active) md-icon:hover::after {
+  width: 220%;
+  height: 220%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0.06; /* hover: slight darkening */
+}
+
+.side-nav-rail .nav-container .nav-item:not(.active) md-icon:active::after,
+.side-nav-rail .nav-container .nav-item:not(.active) md-icon:focus-visible::after {
+  width: 220%;
+  height: 220%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0.22; /* pressed: darker than hover */
+}
+
+/* MD3 pressed/active interaction for non-active items (pointer down) */
+.side-nav-rail .nav-container .nav-item:not(.active) md-icon:active,
+.side-nav-rail .nav-container .nav-item:not(.active) md-icon:focus-visible {
+  background-color: var(--md-sys-color-surface-container-highest);
+  /* MD3 pressed: slightly reduce opacity for contrast rather than translating */
+  opacity: 0.88;
 }
 
 @media (max-width: 900px) {
