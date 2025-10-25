@@ -179,13 +179,25 @@ function ReportDetails() {
 
       <div className="report-details-card">
         <header className="report-header">
-          <div>
+          <div className="report-header-left">
             <h2>{report.title}</h2>
             <span className={`status-badge status-${report.status.toLowerCase()}`}>
               {report.status}
             </span>
           </div>
-          <md-icon className="map-icon">map</md-icon>
+          <div className="report-header-right">
+            <md-icon-button className="map-icon" aria-label="Open map" title="Open map">
+              <md-icon>map</md-icon>
+            </md-icon-button>
+            <md-icon-button
+              className="delete-icon"
+              onClick={handleDelete}
+              aria-label="Delete report"
+              title="Delete report"
+            >
+              <md-icon>delete</md-icon>
+            </md-icon-button>
+          </div>
         </header>
 
         <section className="report-info">
@@ -259,13 +271,7 @@ function ReportDetails() {
               <md-icon slot="icon">send</md-icon> Post
             </md-filled-button>
           </form>
-        </section>
-
-        <section className="actions">
-          <md-text-button onClick={handleDelete} className="delete-btn">
-            <md-icon slot="icon">delete</md-icon> Delete Report
-          </md-text-button>
-        </section>
+        </section>        
       </div>
     </div>
   );
