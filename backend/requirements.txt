@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+python-multipart
+python-dotenv
+pillow
+exifread
+opencv-python-headless
+transformers
+torch
+sentence-transformers
+scikit-learn
+xgboost
+joblib
+numpy
+pandas
+supabase
