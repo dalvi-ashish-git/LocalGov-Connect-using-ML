@@ -7,7 +7,15 @@ function SideNavigationRail({isDrawerOpen, onMenuClick}) {
   return (
     <div className="side-nav-rail"> 
       <div className="nav-container">
-        <md-icon-button id="nav-menu" className="menu-button" toggle selected={!isDrawerOpen}  onClick={onMenuClick}>
+        <md-icon-button
+          id="nav-menu"
+          title={isDrawerOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label="Close navigation menu"
+          aria-label-selected="Open navigation menu"
+          className="menu-button"
+          toggle
+          selected={!isDrawerOpen}
+          onClick={onMenuClick}>
           <md-icon slot="selected">menu</md-icon>
           <md-icon>menu_open</md-icon>
         </md-icon-button>
