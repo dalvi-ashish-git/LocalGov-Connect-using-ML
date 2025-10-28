@@ -1,13 +1,8 @@
-# utils/file_utils.py
 import os
 from uuid import uuid4
 from utils.config import TEMP_UPLOAD_DIR
 
 def save_upload_temp(upload_file):
-    """
-    upload_file: Starlette UploadFile
-    returns: filepath
-    """
     ext = os.path.splitext(upload_file.filename)[1] or ".jpg"
     fname = f"{uuid4().hex}{ext}"
     path = os.path.join(TEMP_UPLOAD_DIR, fname)

@@ -1,70 +1,88 @@
-# api/routes_report.py
-from fastapi import APIRouter, File, UploadFile, Form, Depends
+from fastapi import APIRouter, File, UploadFile, Form
 from utils.logger import get_logger
-from utils.response_utils import success, fail
 from utils.file_utils import save_upload_temp, remove_file
 from utils.validators import validate_image_file
-from services.image_auth import is_tampered
 from services.exif_utils import extract_gps_from_file
 from services.clip_match import match_passes
+from services.image_auth import is_tampered_heuristic
 from services.severity_model import predict_severity
-from services.supabase_client import save_report
+from utils.config import CLIP_SIMILARITY_THRESHOLD
+from fastapi.responses import JSONResponse
 
 logger = get_logger("api.report")
 router = APIRouter()
 
-@router.post("/report/process")
+@router.post("/process-report")
 async def process_report(
     title: str = Form(...),
     description: str = Form(...),
-    category: str = Form(...),
-    citizen_id: str = Form(None),
     image: UploadFile = File(...)
 ):
-    # Validate file
+    """
+    Pipeline:
+    1) Validate and save upload
+    2) EXIF GPS check (terminate if missing)
+    3) CLIP match check between image and combined text (terminate if mismatch)
+    4) Tamper detection (score)
+    5) Severity prediction (text only)
+    6) Return processed payload (frontend will save to Supabase)
+    """
+
+    # Validate MIME and size
     validate_image_file(image)
 
     # Save to temp
     path = save_upload_temp(image)
+    logger.info(f"Saved upload to {path}")
 
     try:
-        # 1. Tamper check
-        tampered, tamper_score = is_tampered(path)
-        if tampered:
-            return fail({"reason": "tampered_image", "score": tamper_score}, code=400)
-
-        # 2. EXIF GPS extraction
+        # 1) EXIF GPS
         gps = extract_gps_from_file(path)
         if not gps:
-            return fail("Image missing GPS EXIF data. Please enable location and re-upload.", code=400)
+            # Terminate process — inform frontend to ask citizen to enable location and re-upload
+            return JSONResponse(status_code=400, content={
+                "success": False,
+                "error": "Image missing GPS EXIF data. Please enable location in camera and re-upload."
+            })
 
-        # 3. CLIP match
-        combined_text = f"{category}. {title}. {description}"
-        passes, matching_score = match_passes(path, combined_text)
-        if not passes:
-            return fail({"reason": "image_text_mismatch", "score": matching_score}, code=400)
+        # 2) Match image <-> text (title + description)
+        combined_text = f"{title}. {description}"
+        passes_match, match_score = match_passes(path, combined_text)
+        if not passes_match:
+            return JSONResponse(status_code=400, content={
+                "success": False,
+                "error": "Image does not match the provided title/description.",
+                "matching_score": match_score
+            })
 
-        # 4. Severity prediction
-        severity_label, severity_score = predict_severity(title, description, category)
+        # 3) Tamper detection (score)
+        tampered, tamper_score = is_tampered_heuristic(path)
 
-        # 5. Build payload and optionally save to Supabase
+        # 4) Severity prediction based on title + description ONLY
+        severity_label, severity_score = predict_severity(title, description)
+
+        # Final payload prepared to be sent back to frontend for saving to Supabase
         payload = {
             "title": title,
             "description": description,
-            "category": category,
-            "citizen_id": citizen_id,
-            "gps": gps,
+            "latitude": gps["latitude"],
+            "longitude": gps["longitude"],
+            "matching_score": match_score,
+            "tamper_score": tamper_score,
+            "tampered": tampered,
             "severity": severity_label,
-            "severity_score": severity_score,
-            "matching_score": matching_score,
-            "tamper_score": tamper_score
+            "severity_score": severity_score
         }
 
-        # Attempt to save to Supabase (if configured). Supabase client logs if not configured.
-        save_report(payload)
+        # OPTIONAL: Save to Supabase here (commented) — add in your Supabase keys and function
+        # from services.supabase_client import save_report
+        # save_report(payload)
 
-        return success(data=payload, message="Report processed and stored (if configured).")
+        return {"success": True, "data": payload}
 
+    except Exception as e:
+        logger.exception("Processing failed")
+        return JSONResponse(status_code=500, content={"success": False, "error": "Internal server error"})
     finally:
-        # cleanup temp file
+        # cleanup
         remove_file(path)

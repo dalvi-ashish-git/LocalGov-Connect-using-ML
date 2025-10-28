@@ -1,4 +1,3 @@
-# services/severity_model.py
 import os
 import joblib
 from utils.logger import get_logger
@@ -9,7 +8,7 @@ logger = get_logger("severity_model")
 model = None
 vectorizer = None
 
-def _load_model():
+def load_model():
     global model, vectorizer
     if model is not None and vectorizer is not None:
         return
@@ -17,29 +16,28 @@ def _load_model():
         try:
             model = joblib.load(SEVERITY_MODEL_PATH)
             vectorizer = joblib.load(VECTORIZER_PATH)
-            logger.info("Loaded severity model & vectorizer")
+            logger.info("Loaded severity model and vectorizer")
         except Exception:
-            logger.exception("Failed to load severity model; will use fallback heuristics")
+            logger.exception("Failed to load severity model")
             model = None
             vectorizer = None
     else:
-        logger.info("Severity model or vectorizer not found; using rule-based fallback")
+        logger.info("Severity model files not found; run train/train_severity.py")
 
-def predict_severity(title, description, category):
+def predict_severity(title, description, category=None):
     """
-    Returns (label, score)
-    label in {"low","medium","high"}
-    score: confidence 0-1
+    Returns (label, score). Label in {'low','medium','high'}
+    This function uses text-only model (title + description).
     """
-    _load_model()
-    text = f"{category}. {title}. {description}"
+    load_model()
+    text = f"{title}. {description}"
     if model is None or vectorizer is None:
-        # simple rule-based fallback
+        # fallback heuristic
         txt = text.lower()
-        if any(k in txt for k in ["fire", "death", "fatal", "accident", "collapsed", "flood"]):
-            return "high", 0.9
-        if any(k in txt for k in ["pothole", "garbage", "leak", "overflow"]):
-            return "medium", 0.7
+        if any(k in txt for k in ["fire","accident","flood","collapse","death","electrocute"]):
+            return "high", 0.95
+        if any(k in txt for k in ["pothole","garbage","leak","overflow","broken"]):
+            return "medium", 0.75
         return "low", 0.5
     try:
         X = vectorizer.transform([text])
@@ -49,4 +47,4 @@ def predict_severity(title, description, category):
         return str(label), float(proba[idx])
     except Exception:
         logger.exception("Severity model inference failed; using fallback")
-        return "low", 0.4
+        return "low", 0.5

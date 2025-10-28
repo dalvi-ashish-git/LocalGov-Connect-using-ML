@@ -9,7 +9,6 @@ transformers
 torch
 sentence-transformers
 scikit-learn
-xgboost
 joblib
 numpy
 pandas

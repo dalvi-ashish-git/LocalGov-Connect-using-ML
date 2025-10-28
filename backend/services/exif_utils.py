@@ -1,4 +1,3 @@
-# services/exif_utils.py
 from PIL import Image
 import exifread
 from utils.logger import get_logger

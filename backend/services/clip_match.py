@@ -1,41 +1,38 @@
-# services/clip_match.py
 from utils.logger import get_logger
 from utils.config import CLIP_MODEL_NAME, CLIP_SIMILARITY_THRESHOLD
-import torch
 from PIL import Image
 import os
+import torch
 
 logger = get_logger("clip_match")
 
-# We'll try to lazy-load CLIP (HuggingFace Transformers). If not present, fall back to simple keyword match.
 model = None
 processor = None
 device = "cuda" if torch.cuda.is_available() else "cpu"
-clip_available = False
+_clip_loaded = False
 
 def _try_load_clip():
-    global model, processor, clip_available
-    if model is not None:
+    global model, processor, _clip_loaded
+    if _clip_loaded:
         return
     try:
         from transformers import CLIPProcessor, CLIPModel
         model = CLIPModel.from_pretrained(CLIP_MODEL_NAME).to(device)
         processor = CLIPProcessor.from_pretrained(CLIP_MODEL_NAME)
-        clip_available = True
-        logger.info("Loaded CLIP model")
+        _clip_loaded = True
+        logger.info("CLIP loaded")
     except Exception:
-        logger.exception("Failed to load CLIP. Falling back to keyword-based matching.")
-        clip_available = False
+        logger.exception("Failed to load CLIP; using fallback keyword matcher")
+        _clip_loaded = False
 
 def clip_similarity(image_path, text):
     _try_load_clip()
-    if not clip_available:
-        # fallback: simple token overlap / keyword check
+    if not _clip_loaded:
+        # fallback: compute overlap ratio of long keywords in filename and text
         txt = text.lower()
-        image_fname = os.path.basename(image_path).lower()
-        keywords = [w for w in txt.split() if len(w) > 3]
-        matches = sum(1 for k in keywords if k in image_fname)
-        # normalized pseudo-score
+        keywords = [w for w in txt.split() if len(w) > 4]
+        fname = os.path.basename(image_path).lower()
+        matches = sum(1 for k in keywords if k in fname)
         score = matches / max(1, len(keywords))
         return float(score)
     try:
@@ -55,5 +52,5 @@ def clip_similarity(image_path, text):
 
 def match_passes(image_path, text, threshold=CLIP_SIMILARITY_THRESHOLD):
     score = clip_similarity(image_path, text)
-    logger.info(f"CLIP / fallback score: {score}")
+    logger.info(f"matching score: {score}")
     return (score >= threshold, float(score))
