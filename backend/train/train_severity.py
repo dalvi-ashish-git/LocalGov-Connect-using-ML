@@ -22,7 +22,7 @@ df['text'] = df['title'].fillna('') + ". " + df['description'].fillna('')
 X = df['text']
 y = df['severity']
 
-Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.2, random_state=42, stratify=None) # stratify=y
 
 vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1,2))
 Xtr_tfidf = vectorizer.fit_transform(Xtr)
