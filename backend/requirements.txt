@@ -10,6 +10,6 @@ torch
 sentence-transformers
 scikit-learn
 joblib
-numpy
+numpy==2.3.4
 pandas
 supabase
