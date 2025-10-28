@@ -65,8 +65,8 @@ async def process_report(
         payload = {
             "title": title,
             "description": description,
-            "latitude": gps["latitude"],
-            "longitude": gps["longitude"],
+            "latitude": gps["lat"],
+            "longitude": gps["lon"],
             "matching_score": match_score,
             "tamper_score": tamper_score,
             "tampered": tampered,
