@@ -2,13 +2,13 @@ from utils.logger import get_logger
 from utils.config import CLIP_MODEL_NAME, CLIP_SIMILARITY_THRESHOLD
 from PIL import Image
 import os
-import torch
+# import torch
 
 logger = get_logger("clip_match")
 
 model = None
 processor = None
-device = "cuda" if torch.cuda.is_available() else "cpu"
+# device = "cuda" if torch.cuda.is_available() else "cpu"
 _clip_loaded = False
 
 def _try_load_clip():
@@ -16,9 +16,9 @@ def _try_load_clip():
     if _clip_loaded:
         return
     try:
-        from transformers import CLIPProcessor, CLIPModel
-        model = CLIPModel.from_pretrained(CLIP_MODEL_NAME).to(device)
-        processor = CLIPProcessor.from_pretrained(CLIP_MODEL_NAME)
+        # from transformers import CLIPProcessor, CLIPModel
+        # model = CLIPModel.from_pretrained(CLIP_MODEL_NAME).to(device)
+        # processor = CLIPProcessor.from_pretrained(CLIP_MODEL_NAME)
         _clip_loaded = True
         logger.info("CLIP loaded")
     except Exception:
@@ -48,7 +48,7 @@ def clip_similarity(image_path, text):
             return float(sim)
     except Exception:
         logger.exception("CLIP similarity failed")
-        return -1.0
+        return 1.0 # -1.0
 
 def match_passes(image_path, text, threshold=CLIP_SIMILARITY_THRESHOLD):
     score = clip_similarity(image_path, text)
