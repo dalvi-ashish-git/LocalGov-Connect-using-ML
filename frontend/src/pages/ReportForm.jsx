@@ -2,7 +2,12 @@ import './ReportForm.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../utils/supabaseClient';
+import LocationMap from "../components/LocationMap";
 import categories from '../utils/selectCategories.js';
+
+
+// Backend base URL — prefer Vite env variable VITE_BACKEND_URL, fallback to localhost:8000
+const BACKEND_BASE = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
 
 function ReportForm() {
   const [title, setTitle] = useState('');
@@ -10,6 +15,7 @@ function ReportForm() {
   const [category, setCategory] = useState('');
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [location, setLocation] = useState(false);
   const [message, setMessage] = useState('Fill all the details');
   const [fileNames, setFileNames] = useState("No files selected");
   const [processingStep, setProcessingStep] = useState('');
@@ -49,9 +55,46 @@ function ReportForm() {
       if (!title || !description || !category || files.length === 0) {
         throw new Error('Please fill in all required fields.');
       }
+      // First, send the first image + title/description to the backend for
+      // processing (EXIF, matching, tamper, severity). The backend returns
+      // metadata which we will include when saving to Supabase.
+      setProcessingStep('processing');
+      setMessage('Processing image on server...');
 
+      const fd = new FormData();
+      fd.append('title', title);
+      fd.append('description', description);
+      // backend expects a single file field named 'image' (we send the first)
+      fd.append('image', files[0]);
+
+      const resp = await fetch(`${BACKEND_BASE}/api/process-report`, {
+        method: 'POST',
+        body: fd,
+      });
+
+      const respJson = await resp.json().catch(() => null);
+
+      if (!resp.ok) {
+        // Show backend-provided message if present
+        const errMsg = respJson?.error || (respJson?.message) || `Server rejected report (status ${resp.status})`;
+        throw new Error(errMsg || 'Server rejected report');
+      }
+
+      const backendData = respJson?.data;
+
+      setLocation({
+        lat: backendData.latitude ?? null,
+        lng: backendData.longitude ?? null,
+      });
+
+      if (!backendData) {
+        throw new Error('Processing failed: no data returned from server');
+      }
+
+      // Now upload all images to Supabase storage (we do this after server
+      // processing so the server can validate/match the primary image).
       setProcessingStep('uploading');
-      setMessage('Uploading images...');
+      setMessage('Uploading images to storage...');
       const fileUrls = [];
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -70,28 +113,34 @@ function ReportForm() {
       }
 
       setProcessingStep('submitting');
-      setMessage('Submitting report...');
+      setMessage('Saving report to database...');
+
+      const insertPayload = {
+        title,
+        description,
+        category,
+        status: 'pending',
+        image_urls: fileUrls,
+        latitude: backendData.latitude ?? 0.0,
+        longitude: backendData.longitude ?? 0.0,
+        address: backendData.address ?? '',
+        // Add ML-derived fields from backend
+        matching_score: backendData.matching_score ?? null,
+        tamper_score: backendData.tamper_score ?? null,
+        tampered: backendData.tampered ?? null,
+        severity: backendData.severity ?? null,
+        severity_score: backendData.severity_score ?? null,
+        // explicit nulls for gov fields
+        gov_official_id: null,
+        resolved_by: null,
+        last_status_changed_by: null,
+        last_status_changed_at: null,
+        resolution_images: null,
+      };
+
       const { error: insertError } = await supabase
         .from('civic_issues')
-        .insert([
-          {
-            title,
-            description,
-            category,
-            status: 'pending',
-            image_urls: fileUrls,
-            // provide numeric defaults to satisfy NOT NULL constraints in DB
-            latitude: 0.0,
-            longitude: 0.0,
-            address: '',
-            // explicitly set gov-related fields to null to avoid auth.uid() default or invalid FK
-            gov_official_id: null,
-            resolved_by: null,
-            last_status_changed_by: null,
-            last_status_changed_at: null,
-            resolution_images: null,
-          },
-        ]);
+        .insert([insertPayload]);
 
       if (insertError) throw insertError;
 
@@ -118,6 +167,7 @@ function ReportForm() {
     setFiles([]);
     setFileNames("No files selected");
     setMessage('');
+    setLocation(false);
   };
 
   return (
@@ -148,6 +198,12 @@ function ReportForm() {
           </md-filled-button>
           <span id="fileNames">{fileNames}</span>
         </div>
+
+        {/* 🗺️ Show map only when location coordinates are available */}
+        {location && location.lat && location.lng && (
+          <LocationMap lat={location.lat} lng={location.lng} label="Detected issue location" />
+        )}
+
         {message && (
           <div className={`message-box ${
             processingStep === 'success' ? 'success' : 
